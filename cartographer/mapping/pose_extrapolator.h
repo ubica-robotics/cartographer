@@ -61,8 +61,12 @@ class PoseExtrapolator : public PoseExtrapolatorInterface {
   // Returns the current gravity alignment estimate as a rotation from
   // the tracking frame into a gravity aligned frame.
   Eigen::Quaterniond EstimateGravityOrientation(common::Time time) override;
+  void StopOdometry();
+  void StartOdometry();
+  bool GetOdometryStatus();
 
  private:
+  bool stop_odometry_;
   void UpdateVelocitiesFromPoses();
   void TrimImuData();
   void TrimOdometryData();

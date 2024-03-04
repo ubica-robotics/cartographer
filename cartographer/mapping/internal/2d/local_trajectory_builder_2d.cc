@@ -44,7 +44,9 @@ LocalTrajectoryBuilder2D::LocalTrajectoryBuilder2D(
       real_time_correlative_scan_matcher_(
           options_.real_time_correlative_scan_matcher_options()),
       ceres_scan_matcher_(options_.ceres_scan_matcher_options()),
-      range_data_collator_(expected_range_sensor_ids) {}
+      range_data_collator_(expected_range_sensor_ids) {
+    adaptive_correlative_scan_matching_ = false;
+}
 
 LocalTrajectoryBuilder2D::~LocalTrajectoryBuilder2D() {}
 
@@ -74,7 +76,7 @@ std::unique_ptr<transform::Rigid2d> LocalTrajectoryBuilder2D::ScanMatch(
   // the Ceres scan matcher.
   transform::Rigid2d initial_ceres_pose = pose_prediction;
 
-  if (options_.use_online_correlative_scan_matching()) {
+  if (options_.use_online_correlative_scan_matching() || adaptive_correlative_scan_matching_) {
     const double score = real_time_correlative_scan_matcher_.Match(
         pose_prediction, filtered_gravity_aligned_point_cloud,
         *matching_submap->grid(), &initial_ceres_pose);
@@ -313,6 +315,22 @@ void LocalTrajectoryBuilder2D::AddOdometryData(
     return;
   }
   extrapolator_->AddOdometryData(odometry_data);
+}
+
+void LocalTrajectoryBuilder2D::AddAdaptiveScanMatchingData(
+        const sensor::AdaptiveScanMatchingData& adaptive_scan_matching_data) {
+    if (extrapolator_ == nullptr) {
+        // Until we've initialized the extrapolator we cannot add adaptive_scan_matching data.
+        LOG(INFO) << "Extrapolator not yet initialized.";
+        return;
+    }
+    if (adaptive_scan_matching_data.scan_matching) {
+        adaptive_correlative_scan_matching_ = true;
+        extrapolator_->StopOdometry();
+    } else {
+        adaptive_correlative_scan_matching_ = false;
+        extrapolator_->StartOdometry();
+    }
 }
 
 void LocalTrajectoryBuilder2D::InitializeExtrapolator(const common::Time time) {
