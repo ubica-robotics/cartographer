@@ -2,8 +2,8 @@
 Changelog for package cartographer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+102.1.0 (2024-03-05)
+--------------------
 * Dev 8095 extend cartographer to adaptively switch to and from scan matching based on odom data (`#2 <https://github.com/ubica-robotics/cartographer/issues/2>`_)
   * [DEV-8095] Extended carto to handle adaptive scan matching
   * [DEV-8095] Handles adaptive scan matching data in collated trajectory builder
