@@ -2,8 +2,8 @@
 Changelog for package cartographer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+102.0.0 (2024-03-05)
+--------------------
 * Add note for ROS users. (`#1941 <https://github.com/ubica-robotics/cartographer/issues/1941>`_)
   * update rules_boost to latest version (`#1898 <https://github.com/ubica-robotics/cartographer/issues/1898>`_)
   * Add note for ROS users.
