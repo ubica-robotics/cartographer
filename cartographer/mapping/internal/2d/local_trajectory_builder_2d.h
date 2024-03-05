@@ -32,6 +32,7 @@
 #include "cartographer/sensor/imu_data.h"
 #include "cartographer/sensor/internal/voxel_filter.h"
 #include "cartographer/sensor/odometry_data.h"
+#include "cartographer/sensor/adaptive_scan_matching_data.h"
 #include "cartographer/sensor/range_data.h"
 #include "cartographer/transform/rigid_transform.h"
 
@@ -73,6 +74,7 @@ class LocalTrajectoryBuilder2D {
       const sensor::TimedPointCloudData& range_data);
   void AddImuData(const sensor::ImuData& imu_data);
   void AddOdometryData(const sensor::OdometryData& odometry_data);
+  void AddAdaptiveScanMatchingData(const sensor::AdaptiveScanMatchingData& adaptive_scan_matching_data);
 
   static void RegisterMetrics(metrics::FamilyFactory* family_factory);
 
@@ -117,6 +119,7 @@ class LocalTrajectoryBuilder2D {
   absl::optional<common::Time> last_sensor_time_;
 
   RangeDataCollator range_data_collator_;
+  bool adaptive_correlative_scan_matching_;
 };
 
 }  // namespace mapping

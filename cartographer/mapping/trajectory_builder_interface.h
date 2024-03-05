@@ -31,6 +31,7 @@
 #include "cartographer/sensor/imu_data.h"
 #include "cartographer/sensor/landmark_data.h"
 #include "cartographer/sensor/odometry_data.h"
+#include "cartographer/sensor/adaptive_scan_matching_data.h"
 #include "cartographer/sensor/timed_point_cloud_data.h"
 
 namespace cartographer {
@@ -68,6 +69,7 @@ class TrajectoryBuilderInterface {
       IMU,
       ODOMETRY,
       FIXED_FRAME_POSE,
+      ADAPTIVE_SCAN_MATCHING,
       LANDMARK,
       LOCAL_SLAM_RESULT
     };
@@ -98,6 +100,8 @@ class TrajectoryBuilderInterface {
       const sensor::TimedPointCloudData& timed_point_cloud_data) = 0;
   virtual void AddSensorData(const std::string& sensor_id,
                              const sensor::ImuData& imu_data) = 0;
+  virtual void AddSensorData(const std::string& sensor_id,
+                             const sensor::AdaptiveScanMatchingData& adaptive_scan_matching_data) = 0;
   virtual void AddSensorData(const std::string& sensor_id,
                              const sensor::OdometryData& odometry_data) = 0;
   virtual void AddSensorData(

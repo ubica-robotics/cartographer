@@ -30,7 +30,9 @@ PoseExtrapolator::PoseExtrapolator(const common::Duration pose_queue_duration,
     : pose_queue_duration_(pose_queue_duration),
       gravity_time_constant_(imu_gravity_time_constant),
       cached_extrapolated_pose_{common::Time::min(),
-                                transform::Rigid3d::Identity()} {}
+                                transform::Rigid3d::Identity()} {
+  StartOdometry();
+}
 
 std::unique_ptr<PoseExtrapolator> PoseExtrapolator::InitializeWithImu(
     const common::Duration pose_queue_duration,
@@ -102,6 +104,12 @@ void PoseExtrapolator::AddOdometryData(
   odometry_data_.push_back(odometry_data);
   TrimOdometryData();
   if (odometry_data_.size() < 2) {
+    return;
+  }
+  if (GetOdometryStatus()) {
+    odometry_data_.clear();
+    linear_velocity_from_odometry_ = Eigen::Vector3d::Zero();
+    angular_velocity_from_odometry_ = Eigen::Vector3d::Zero();
     return;
   }
   // TODO(whess): Improve by using more than just the last two odometry poses.
@@ -257,6 +265,10 @@ PoseExtrapolator::ExtrapolatePosesWithGravity(
                              current_velocity,
                              EstimateGravityOrientation(times.back())};
 }
+
+void PoseExtrapolator::StopOdometry() { stop_odometry_ = true; }
+void PoseExtrapolator::StartOdometry() { stop_odometry_ = false; }
+bool PoseExtrapolator::GetOdometryStatus() { return stop_odometry_; }
 
 }  // namespace mapping
 }  // namespace cartographer

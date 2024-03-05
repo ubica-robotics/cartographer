@@ -69,6 +69,12 @@ class CollatedTrajectoryBuilder : public TrajectoryBuilderInterface {
 
   void AddSensorData(
       const std::string& sensor_id,
+      const sensor::AdaptiveScanMatchingData& adaptive_scan_matching_data) override {
+    AddData(sensor::MakeDispatchable(sensor_id, adaptive_scan_matching_data));
+  }
+
+  void AddSensorData(
+      const std::string& sensor_id,
       const sensor::FixedFramePoseData& fixed_frame_pose_data) override {
     if (collate_fixed_frame_) {
       AddData(sensor::MakeDispatchable(sensor_id, fixed_frame_pose_data));
