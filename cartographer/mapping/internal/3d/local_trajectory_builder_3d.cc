@@ -109,7 +109,7 @@ std::unique_ptr<transform::Rigid3d> LocalTrajectoryBuilder3D::ScanMatch(
 }
 
 void LocalTrajectoryBuilder3D::AddAdaptiveScanMatchingData(
-        const sensor::AdaptiveScanMatchingData& adaptive_scan_matching_data) {}
+  const sensor::AdaptiveScanMatchingData& adaptive_scan_matching_data) {}
 
 void LocalTrajectoryBuilder3D::AddImuData(const sensor::ImuData& imu_data) {
   if (extrapolator_ != nullptr) {

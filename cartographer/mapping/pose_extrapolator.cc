@@ -31,7 +31,7 @@ PoseExtrapolator::PoseExtrapolator(const common::Duration pose_queue_duration,
       gravity_time_constant_(imu_gravity_time_constant),
       cached_extrapolated_pose_{common::Time::min(),
                                 transform::Rigid3d::Identity()} {
-    StartOdometry();
+  StartOdometry();
 }
 
 std::unique_ptr<PoseExtrapolator> PoseExtrapolator::InitializeWithImu(

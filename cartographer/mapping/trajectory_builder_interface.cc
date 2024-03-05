@@ -125,7 +125,7 @@ TrajectoryBuilderInterface::SensorId FromProto(
       break;
     case proto::SensorId::ADAPTIVE_SCAN_MATCHING:
       sensor_id.type =
-              TrajectoryBuilderInterface::SensorId::SensorType::ADAPTIVE_SCAN_MATCHING;
+          TrajectoryBuilderInterface::SensorId::SensorType::ADAPTIVE_SCAN_MATCHING;
       break;
     case proto::SensorId::LANDMARK:
       sensor_id.type =

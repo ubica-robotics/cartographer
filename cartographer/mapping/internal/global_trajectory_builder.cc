@@ -48,7 +48,7 @@ class GlobalTrajectoryBuilder : public mapping::TrajectoryBuilderInterface {
         local_trajectory_builder_(std::move(local_trajectory_builder)),
         local_slam_result_callback_(local_slam_result_callback),
         pose_graph_odometry_motion_filter_(pose_graph_odometry_motion_filter) {
-      ignore_odometry_ = false;
+    ignore_odometry_ = false;
   }
   ~GlobalTrajectoryBuilder() override {}
 
@@ -97,12 +97,13 @@ class GlobalTrajectoryBuilder : public mapping::TrajectoryBuilderInterface {
     pose_graph_->AddImuData(trajectory_id_, imu_data);
   }
 
-  void AddSensorData(const std::string& sensor_id,
-                     const sensor::AdaptiveScanMatchingData& adaptive_scan_matching_data) override {
-      if (local_trajectory_builder_) {
-          ignore_odometry_ = true;
-          local_trajectory_builder_->AddAdaptiveScanMatchingData(adaptive_scan_matching_data);
-      }
+  void AddSensorData(
+      const std::string& sensor_id,
+      const sensor::AdaptiveScanMatchingData& adaptive_scan_matching_data) override {
+    if (local_trajectory_builder_) {
+      ignore_odometry_ = true;
+      local_trajectory_builder_->AddAdaptiveScanMatchingData(adaptive_scan_matching_data);
+    }
   }
 
   void AddSensorData(const std::string& sensor_id,
@@ -116,7 +117,7 @@ class GlobalTrajectoryBuilder : public mapping::TrajectoryBuilderInterface {
     // Related issue: cartographer-project/cartographer/#1768
     if ((pose_graph_odometry_motion_filter_.has_value() &&
          pose_graph_odometry_motion_filter_.value().IsSimilar(
-            odometry_data.time, odometry_data.pose)) || ignore_odometry_) {
+           odometry_data.time, odometry_data.pose)) || ignore_odometry_) {
       return;
     }
     pose_graph_->AddOdometryData(trajectory_id_, odometry_data);
