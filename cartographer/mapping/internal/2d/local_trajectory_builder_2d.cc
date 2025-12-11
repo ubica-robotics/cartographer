@@ -318,19 +318,24 @@ void LocalTrajectoryBuilder2D::AddOdometryData(
 }
 
 void LocalTrajectoryBuilder2D::AddAdaptiveScanMatchingData(
-        const sensor::AdaptiveScanMatchingData& adaptive_scan_matching_data) {
-    if (extrapolator_ == nullptr) {
-      // Until we've initialized the extrapolator we cannot add adaptive_scan_matching data.
-      LOG(INFO) << "Extrapolator not yet initialized.";
-      return;
-    }
-    if (adaptive_scan_matching_data.scan_matching) {
-      adaptive_correlative_scan_matching_ = true;
-      extrapolator_->StopOdometry();
-    } else {
-      adaptive_correlative_scan_matching_ = false;
-      extrapolator_->StartOdometry();
-    }
+    const sensor::AdaptiveScanMatchingData& adaptive_scan_matching_data) {
+  if (extrapolator_ == nullptr) {
+    // Until we've initialized the extrapolator we cannot add adaptive_scan_matching data.
+    LOG(INFO) << "Extrapolator not yet initialized.";
+    return;
+  }
+  if (adaptive_scan_matching_data.scan_matching) {
+    adaptive_correlative_scan_matching_ = true;
+    extrapolator_->StopOdometry();
+  } else {
+    adaptive_correlative_scan_matching_ = false;
+    extrapolator_->StartOdometry();
+  }
+}
+
+void LocalTrajectoryBuilder2D::AddAdaptiveMotionFilterData(
+    const sensor::AdaptiveMotionFilterData& adaptive_motion_filter_data) {
+  motion_filter_.UpdateMotionFilter(adaptive_motion_filter_data);
 }
 
 void LocalTrajectoryBuilder2D::InitializeExtrapolator(const common::Time time) {

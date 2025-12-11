@@ -55,6 +55,7 @@ message SensorId {
     LANDMARK = 4;
     LOCAL_SLAM_RESULT = 5;
     ADAPTIVE_SCAN_MATCHING = 6;
+    ADAPTIVE_MOTION_FILTER = 7;
   }
 
   SensorType type = 1;

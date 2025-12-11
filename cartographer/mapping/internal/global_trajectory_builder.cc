@@ -106,6 +106,14 @@ class GlobalTrajectoryBuilder : public mapping::TrajectoryBuilderInterface {
     }
   }
 
+  void AddSensorData(
+      const std::string& sensor_id,
+      const sensor::AdaptiveMotionFilterData& adaptive_motion_filter_data) override {
+    if (local_trajectory_builder_) {
+      local_trajectory_builder_->AddAdaptiveMotionFilterData(adaptive_motion_filter_data);
+    }
+  }
+
   void AddSensorData(const std::string& sensor_id,
                      const sensor::OdometryData& odometry_data) override {
     CHECK(odometry_data.pose.IsValid()) << odometry_data.pose;

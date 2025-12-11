@@ -92,6 +92,9 @@ proto::SensorId ToProto(const TrajectoryBuilderInterface::SensorId& sensor_id) {
     case TrajectoryBuilderInterface::SensorId::SensorType::ADAPTIVE_SCAN_MATCHING:
       sensor_id_proto.set_type(proto::SensorId::ADAPTIVE_SCAN_MATCHING);
       break;
+    case TrajectoryBuilderInterface::SensorId::SensorType::ADAPTIVE_MOTION_FILTER:
+      sensor_id_proto.set_type(proto::SensorId::ADAPTIVE_MOTION_FILTER);
+      break;
     case TrajectoryBuilderInterface::SensorId::SensorType::LANDMARK:
       sensor_id_proto.set_type(proto::SensorId::LANDMARK);
       break;
@@ -126,6 +129,10 @@ TrajectoryBuilderInterface::SensorId FromProto(
     case proto::SensorId::ADAPTIVE_SCAN_MATCHING:
       sensor_id.type =
           TrajectoryBuilderInterface::SensorId::SensorType::ADAPTIVE_SCAN_MATCHING;
+      break;
+    case proto::SensorId::ADAPTIVE_MOTION_FILTER:
+      sensor_id.type =
+          TrajectoryBuilderInterface::SensorId::SensorType::ADAPTIVE_MOTION_FILTER;
       break;
     case proto::SensorId::LANDMARK:
       sensor_id.type =
