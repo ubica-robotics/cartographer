@@ -23,6 +23,7 @@
 #include "cartographer/common/time.h"
 #include "cartographer/mapping/proto/motion_filter_options.pb.h"
 #include "cartographer/transform/rigid_transform.h"
+#include "cartographer/sensor/adaptive_motion_filter_data.h"
 
 namespace cartographer {
 namespace mapping {
@@ -39,9 +40,10 @@ class MotionFilter {
   // threshold, returns false. Otherwise the relative motion is accumulated and
   // true is returned.
   bool IsSimilar(common::Time time, const transform::Rigid3d& pose);
+  void UpdateMotionFilter(const sensor::AdaptiveMotionFilterData& adaptive_motion_filter_data);
 
  private:
-  const proto::MotionFilterOptions options_;
+  proto::MotionFilterOptions options_;
   int num_total_ = 0;
   int num_different_ = 0;
   common::Time last_time_;

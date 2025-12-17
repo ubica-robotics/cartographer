@@ -57,5 +57,16 @@ bool MotionFilter::IsSimilar(const common::Time time,
   return false;
 }
 
+void MotionFilter::UpdateMotionFilter(
+    const sensor::AdaptiveMotionFilterData& adaptive_motion_filter_data) {
+  if (options_.max_time_seconds() != adaptive_motion_filter_data.max_time_seconds ||
+      options_.max_distance_meters() != adaptive_motion_filter_data.max_distance_meters ||
+      options_.max_angle_radians() != adaptive_motion_filter_data.max_angle_radians) {
+    options_.set_max_time_seconds(adaptive_motion_filter_data.max_time_seconds);
+    options_.set_max_distance_meters(adaptive_motion_filter_data.max_distance_meters);
+    options_.set_max_angle_radians(adaptive_motion_filter_data.max_angle_radians);
+  }
+}
+
 }  // namespace mapping
 }  // namespace cartographer
