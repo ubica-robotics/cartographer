@@ -2,8 +2,8 @@
 Changelog for package cartographer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+102.2.0 (2026-01-12)
+--------------------
 * [DEV-15831] Added adaptive motion filter feature (`#3 <https://github.com/ubica-robotics/cartographer/issues/3>`_)
 * Release 2.0.9003
 * Update cartographer to deal with newer ceres (`#24 <https://github.com/ubica-robotics/cartographer/issues/24>`_)
