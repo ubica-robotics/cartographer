@@ -2,6 +2,36 @@
 Changelog for package cartographer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* [DEV-15831] Added adaptive motion filter feature (`#3 <https://github.com/ubica-robotics/cartographer/issues/3>`_)
+* Release 2.0.9003
+* Update cartographer to deal with newer ceres (`#24 <https://github.com/ubica-robotics/cartographer/issues/24>`_)
+  Otherwise modern gcc complains that these are
+  possibly used uninitialized.
+* Release 2.0.9002.
+* Remove CERES_INCLUDE_DIRS.
+* Release 2.0.9001.
+* Make sure to depend on libabsl-dev.
+* Fixes on top of 2.0.0.
+  This makes it so we compile warning-free on Ubuntu Jammy.
+* Release 1.0.9001.
+* Also add googletest as a build dependency.
+* Switch to python3-sphinx dependency.
+* Switch the versioning system to 1.0.9000.
+  See the comment for more details on how and why.
+* Workaround warning about not finding GOOGLETEST_VERSION.
+* Fix warning about move elision.
+* Disable failing test.
+* fix compiler warning about comparison between signed and unsigned in test (`#12 <https://github.com/ubica-robotics/cartographer/issues/12>`_)
+* restrict boost dependencies to the ones used
+* Update the package.xml dependencies.
+* Switch maintainers to Open Robotics.
+  Also update the authors to include the people from Robotis
+  who did the work to update here.
+* Prepare 1.0.0-RC1 release
+* Contributors: Chris Lalancette, Christoph Schütte, Dirk Thomas, Divin Devaiah, Mikael Arguedas
+
 102.1.0 (2024-03-05)
 --------------------
 * Dev 8095 extend cartographer to adaptively switch to and from scan matching based on odom data (`#2 <https://github.com/ubica-robotics/cartographer/issues/2>`_)
